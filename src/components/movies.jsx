@@ -9,13 +9,20 @@ class Movies extends Component {
   handleDelete = movie => {
     // getting all the movies except for the movie that has been deleted
     const movies = this.state.movies.filter(m => m._id !== movie._id);
-    this.setState({ movies});
+    this.setState({ movies });
 
   }
 
   render() {
-    
-    return <table className="table">
+    const { length: count } = this.state.movies;
+
+    if (count === 0)
+      return <p> There are no movies in the database.</p>
+
+    return (
+    <div>
+    <p>Showing {count} movies in the database</p>
+    <table className="table">
       <thead>
         <tr>
           <th>Title</th>
@@ -34,7 +41,9 @@ class Movies extends Component {
           <td><button onClick={() => this.handleDelete(movie)}className="btn btn-danger btn-sm">Delete</button></td>
         </tr>)}
       </tbody>
-    </table>  
+    </table>
+    </div>
+    )
   }
 }
 
