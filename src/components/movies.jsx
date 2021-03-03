@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./common/like";
+import Pagination from "./common/pagination";
 
 class Movies extends Component {
   state = {
-    movies: getMovies()
+    movies: getMovies(),
+    pageSize: 4
   };
 
   handleDelete = movie => {
@@ -20,6 +22,10 @@ class Movies extends Component {
     movies[index] = {...movies[index]};
     movies[index].liked = !movies[index].liked;
     this.setState({movies})
+  }
+  // this should take in the new page number
+  handlePageChange = (page) => {
+    console.log(page);
   }
 
   render() {
@@ -38,7 +44,7 @@ class Movies extends Component {
           <th>Genre</th>
           <th>Stock</th>
           <th>Rate</th>
-          <th></th>
+          <th>Likes</th>
         </tr>
       </thead>
       <tbody>
@@ -50,10 +56,15 @@ class Movies extends Component {
           <td>
             <Like liked={movie.liked} onClick={() => this.handleLike(movie)}/>
           </td>
-          <td><button onClick={() => this.handleDelete(movie)}className="btn btn-danger btn-sm">Delete</button></td>
+          <td><button onClick={() => this.handleDelete(movie)} className="btn btn-danger btn-sm">Delete</button></td>
         </tr>)}
       </tbody>
     </table>
+    <Pagination 
+    itemsCount={count} 
+    pageSize={this.state.pageSize} 
+    onPageChange={this.handlePageChange}
+    />
     </div>
     )
   }
