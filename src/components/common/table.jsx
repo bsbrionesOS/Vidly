@@ -10,7 +10,7 @@ const Table = (props) => {
             columns={columns} 
             sortColumn={sortColumn} 
             onSort={onSort}/>
-            <TableBody data={data} columns={this.columns}/>
+            <TableBody data={data} columns={columns}/>
           </table>
    );
 }
