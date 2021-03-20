@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchBox = ({ value, onChange}) => {
+const SearchBox = ({ value, onChange }) => {
   return ( 
     <input
     type="text"
